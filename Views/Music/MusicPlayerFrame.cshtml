@@ -1,0 +1,6 @@
+@{
+    ViewData["Title"] = "MusicPlayer" + ViewData["SongID"];
+    Layout = "../Shared/_EmbedPage.cshtml";
+}
+
+<iframe width="1200px" height="1000px" src="../MusicPlayer/@ViewData["SongID"]" frameborder="0" scrolling="no" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe>

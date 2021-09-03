@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.5",
+  "version": "1.0.0",
+  "id": "<Bot App ID>",
+  "packageName": "com.microsoft.teams.samples",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://YourAppService.azurewebsites.net",
+    "privacyUrl": "https://YourAppService.azurewebsites.net",
+    "termsOfUseUrl": "https://YourAppService.azurewebsites.net"
+  },
+  "icons": {
+    "color": "icon-color.png",
+    "outline": "icon-outline.png"
+  },
+  "name": {
+    "short": "music",
+    "full": "musicplayer"
+  },
+  "description": {
+    "short": "Play your favorite music album.",
+    "full": "Play your favorite music album with Teams Bot."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "<Bot App ID>",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [ "YourAppService.azurewebsites.net"]
+}

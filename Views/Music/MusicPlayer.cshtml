@@ -1,0 +1,115 @@
+@{
+    ViewData["Title"] = "MusicPlayer";
+    Layout = "../Shared/_EmbedPage.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+<link rel="stylesheet" href="../../musicplayer/style.css?v=4" />
+
+  <div class="player">
+    <div class="details">
+      <div class="now-playing">PLAYING x OF y</div>
+      <div class="track-art"></div>
+      <div class="track-name">Track Name</div>
+      <div class="track-artist">Track Artist</div>
+      <!--div id="davyalbum">111</>
+      <div id="davysong">222</div>
+      <div id="davyfull">333</div-->
+    </div>
+    <div class="buttons">
+      <div class="prev-track" onclick="prevTrack()"><i class="fa fa-step-backward fa-2x"></i></div>
+      <div class="playpause-track" onclick="playpauseTrack()"><i class="fa fa-play-circle fa-5x"></i></div>
+      <div class="next-track" onclick="nextTrack()"><i class="fa fa-step-forward fa-2x"></i></div>
+    </div>
+    <div class="slider_container">
+      <div class="current-time">00:00</div>
+      <input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()">
+      <div class="total-duration">00:00</div>
+    </div>
+    <div class="slider_container">
+      <i class="fa fa-volume-down"></i>
+      <input type="range" min="1" max="100" value="6" class="volume_slider" onchange="setVolume()">
+      <i class="fa fa-volume-up"></i>
+    </div>
+  </div>
+
+  <!-- Load the main script for the player -->
+  <script src="../../musicplayer/main.js?v=1"></script>
+
+  <script>
+
+    function encode_utf8( _t1 )
+    {
+	    var parser = new DOMParser;
+	    var dom = parser.parseFromString(
+		    '<!doctype html><body>' + _t1,
+		    'text/html');
+	    var decodedString = dom.body.textContent;
+
+	    let t1 = _t1.replace(/&#x/g,'%u').replace(/;/g,'')
+	    return unescape(decodedString);
+    }
+
+　　window.onload = function(){
+
+
+
+        let t1 = "@ViewData["SongList"]";
+        let SongList = t1.split("|");
+
+        let l2 = [];
+
+        for (let idx in SongList)
+        {
+            let obj = {
+                          name: encode_utf8("" + SongList[idx]),
+                          artist: "Mooncake",
+                          image: "../../MusicPlayer/b000576f549e4fc3bffc9b7b2eca703f.png",
+                          path: encode_utf8("../../MusicLibs/" + "@ViewData["AlbumName"]" + "/" + SongList[idx])
+                      };
+
+            l2.push(obj);
+        }
+
+        /*
+        let davyalbum = document.querySelector("#davyalbum");
+        let davysong = document.querySelector("#davysong");
+        let davyfull = document.querySelector("#davyfull");
+
+        let t2 = "@ViewData["AlbumName"]";
+
+        davyalbum.textContent = t2.length;
+        davysong.textContent = SongList[0];
+        davyfull.textContent = encode_utf8(l2[0].path);
+
+        //alert(t2);
+        //*/
+
+        track_list = l2;
+        
+        /*
+　　　　 if (@ViewData["SongID"] == 0)
+        {
+            let obj1 = [];
+            obj1.push(track_list[0]);
+            track_list = obj1;
+			console.log("0: " + @ViewData["SongID"]);
+        }
+        else
+        {
+            let obj1 = [];
+            obj1.push(track_list[1]);
+            track_list = obj1;
+			console.log("1: " + @ViewData["SongID"]);
+        }
+        //*/
+		
+		// from main.js
+		loadTrack(track_index);
+
+        setVolume();
+
+        playpauseTrack();
+　　}
+
+  </script>
